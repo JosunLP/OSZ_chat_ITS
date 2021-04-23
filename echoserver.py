@@ -41,6 +41,8 @@ def on_new_client(client_socket: socket.socket, addr):
         client_socket.close()
     except (ConnectionAbortedError, ConnectionResetError):
         print("Connection with " + str(addr) + " closed!")
+        SESSION.socket_list.remove(client_socket)
+        client_socket.close()
 
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
